@@ -18,6 +18,10 @@ class PostLogin implements ILogin {
 
   public execute = async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
+    console.log(email, password);
+    
+    if (!email || !password) return res.status(400).json({ message: "All fields must be filled" }); 
+
     const user = await this._service.execute({ email, password });
 
     if (user.err) return next(user.err);
