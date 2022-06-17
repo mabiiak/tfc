@@ -1,9 +1,34 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
+import LoginService from '../services/users';
+import newToken from '../utils/jwt';
 
-function postLogin(req: Request, res: Response) {
-  const { user } = req.body;
-  console.log(user);
-  console.log(res);
+interface ILogin {
+  execute: controller,
 }
 
-export default postLogin;
+type controller = (req: Request, res: Response, next: NextFunction) =>
+Promise<Response<unknown, Record<string, unknown>> | undefined | void>;
+
+class PostLogin implements ILogin {
+  private _service;
+
+  constructor() {
+    this._service = new LoginService();
+  }
+
+  public execute = async (req: Request, res: Response, next: NextFunction) => {
+    const { email, password } = req.body;
+    const user = await this._service.execute({ email, password });
+
+    if (user.err) return next(user.err);
+
+    const token = newToken(user);
+
+    if (typeof token !== 'string') return next(token);
+    // if ('err' in token) // dois objetos --> ajuda do vinicius tanaka
+
+    return res.status(200).json({ user, token });
+  };
+}
+
+export default PostLogin;
