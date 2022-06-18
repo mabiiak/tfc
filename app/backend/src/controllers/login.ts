@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import LoginService from '../services/users';
-import newToken from '../utils/jwt';
+import { newToken } from '../utils/jwt';
 
 interface ILogin {
   execute: controller,
