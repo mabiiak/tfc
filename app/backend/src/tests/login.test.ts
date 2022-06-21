@@ -15,9 +15,9 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('(01) Testa push/login - usario valido', () => {
-
-  let chaiHttpResponse: Response;
+describe('1 - Testa rota: POST/login', () => {
+  describe('Usario invalido', () => {
+    let chaiHttpResponse: Response;
 
     before(async () => {
       sinon
@@ -40,4 +40,44 @@ describe('(01) Testa push/login - usario valido', () => {
       
       expect(chaiHttpResponse.status).to.be.equal(401);
     });
+
+    it('Campos nulos', async () => {
+      chaiHttpResponse = await chai
+        .request(app)
+        .post('/login')
+        .send({
+          email: '',
+          password: ''
+        });
+      
+      expect(chaiHttpResponse.status).to.be.equal(400);
+    });
+  });
+
+  describe('Usario valido', () => {
+    let chaiHttpResponse: Response;
+
+      before(async () => {
+        sinon
+          .stub(Users, 'findOne')
+          .resolves(User[0] as Users);
+      });
+
+      after(()=> {
+        (Users.findOne as sinon.SinonStub).restore();
+      })
+
+      it('Email correto', async () => {
+        chaiHttpResponse = await chai
+          .request(app)
+          .post('/login')
+          .send({
+            email: 'admin@admin.com',
+            password: 'secret_admin'
+          });
+
+        expect(chaiHttpResponse.status).to.be.equal(200);
+        expect(chaiHttpResponse.body).to.haveOwnProperty('token');
+      });
+  });
 });
