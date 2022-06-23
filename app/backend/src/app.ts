@@ -26,7 +26,7 @@ class App {
 
     this.app.use('/login', routerLogin);
     this.app.use('/teams', routerTeams);
-    this.app.use('/matches', routeMatches;);
+    this.app.use('/matches', routeMatches);
 
     this.app.use(handleError);
   }
