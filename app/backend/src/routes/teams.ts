@@ -1,8 +1,9 @@
 import { Router } from 'express';
+import { controllerAllTeams, controllerOneTeam } from '../controllers/teams';
 
 const routerTeams = Router();
 
-routerTeams.post('/');
-routerTeams.get('/:id');
+routerTeams.get('/', controllerAllTeams);
+routerTeams.get('/:id', controllerOneTeam);
 
 export default routerTeams;

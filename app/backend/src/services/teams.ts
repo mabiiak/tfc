@@ -1,11 +1,12 @@
 import Teams from '../database/models/team';
 
 export async function getAllTeams() {
-  const allTeams = Teams.findAll();
+  const allTeams = await Teams.findAll();
   return allTeams;
 }
 
-export async function getIdTeams(id: number) {
-  const team = Teams.findOne({ where: { id } });
+export async function getIdTeam(id: number) {
+  const team = await Teams.findOne({ where: { id } });
+  console.log(team);
   return team;
 }
