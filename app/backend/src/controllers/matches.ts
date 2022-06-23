@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { getAllMatchesComplete, createMatches } from '../services/matches';
+import { getAll, create, getBy, update } from '../services/matches';
 
-export async function controllerAllMatches(_req: Request, res: Response, next: NextFunction) {
-  const allMatches = await getAllMatchesComplete();
+export async function controllerAll(_req: Request, res: Response, next: NextFunction) {
+  const allMatches = await getAll();
 
   try {
     res.status(200).json(allMatches);
@@ -11,10 +11,15 @@ export async function controllerAllMatches(_req: Request, res: Response, next: N
   }
 }
 
-export async function controllerCreateMatch(req: Request, res: Response) {
-  const itemCreated = await createMatches(req.body);
+export async function controllerCreate(req: Request, res: Response) {
+  const itemCreated = await create(req.body);
 
   res.status(201).json(itemCreated);
 }
 
-export default controllerAllMatches;
+export async function controllerEdit(req: Request, res: Response) {
+  const { id } = req.params;
+
+  await update(Number(id));
+  res.status(200).json({ message: 'Finished' });
+}

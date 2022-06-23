@@ -2,7 +2,7 @@ import Matches from '../database/models/match';
 import Teams from '../database/models/team';
 import InewMatch from '../interfaces/INewMacth';
 
-export async function getAllMatchesComplete() {
+export async function getAll() {
   const allMatches = await Matches.findAll({
     include: [
       { model: Teams, as: 'teamHome', attributes: { exclude: ['id'] } },
@@ -12,7 +12,7 @@ export async function getAllMatchesComplete() {
   return allMatches;
 }
 
-export async function createMatches(newMatch: InewMatch) {
+export async function create(newMatch: InewMatch) {
   const createMatch = await Matches.create({
     homeTeam: newMatch.homeTeam,
     awayTeam: newMatch.awayTeam,
@@ -22,4 +22,14 @@ export async function createMatches(newMatch: InewMatch) {
   });
 
   return createMatch;
+}
+
+export async function getBy(id: number) {
+  const match = Matches.findOne({ where: { id } });
+  return match;
+}
+
+export async function update(id: number) {
+  const match = Matches.update({ inProgress: 0 }, { where: { id } });
+  return match;
 }

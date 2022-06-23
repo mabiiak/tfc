@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { controllerAllMatches, controllerCreateMatch } from '../controllers/matches';
+import { controllerAll, controllerCreate, controllerEdit } from '../controllers/matches';
 
 const routeMatches = Router();
 
-routeMatches.get('/', controllerAllMatches);
-routeMatches.post('/', controllerCreateMatch);
+routeMatches.get('/', controllerAll);
+routeMatches.post('/', controllerCreate);
+routeMatches.patch('/:id/finish', controllerEdit);
 
 export default routeMatches;
