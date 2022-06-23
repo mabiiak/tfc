@@ -1,6 +1,7 @@
 import * as express from 'express';
 import routerLogin from './routes/login';
 import routerTeams from './routes/teams';
+import routeMatches from './routes/matches'
 import handleError from './middlewares/Error';
 
 class App {
@@ -25,6 +26,7 @@ class App {
 
     this.app.use('/login', routerLogin);
     this.app.use('/teams', routerTeams);
+    this.app.use('/matches', routeMatches;);
 
     this.app.use(handleError);
   }

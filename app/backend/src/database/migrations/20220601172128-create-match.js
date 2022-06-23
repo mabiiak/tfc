@@ -31,6 +31,8 @@ module.exports = {
       in_progress: {
         type: Sequelize.BOOLEAN
       },
+
+  
     });
   },
   down: async (queryInterface, Sequelize) => {
