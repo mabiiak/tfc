@@ -1,5 +1,6 @@
 import * as express from 'express';
 import routerLogin from './routes/login';
+import routerTeams from './routes/teams';
 import handleError from './middlewares/Error';
 
 class App {
@@ -23,6 +24,7 @@ class App {
     this.app.use(express.json());
 
     this.app.use('/login', routerLogin);
+    this.app.use('/teams', routerTeams);
 
     this.app.use(handleError);
   }
