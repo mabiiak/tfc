@@ -10,7 +10,7 @@ const jwtConfig: SignOptions = {
 };
 
 type decodedData = {
-  data: { role: string },
+  data: { role: string, userName: string },
 };
 
 export function newToken(info: IUserResume) {
@@ -26,5 +26,12 @@ export function decodedToken(token: string) {
   const decoded = verify(token, secret) as decodedData;
   if (decoded !== undefined) {
     return decoded.data.role;
+  }
+}
+
+export function decodedTokenUser(token: string) {
+  const decoded = verify(token, secret);
+  if (decoded !== undefined) {
+    return decoded;
   }
 }

@@ -29,7 +29,12 @@ export async function getBy(id: number) {
   return match;
 }
 
-export async function update(id: number) {
+export async function updateGoals(id: number, home: number, away: number) {
+  const match = Matches.update({ homeTeamGoals: home, awayTeamGoals: away }, { where: { id } });
+  return match;
+}
+
+export async function updateProgress(id: number) {
   const match = Matches.update({ inProgress: 0 }, { where: { id } });
   return match;
 }
