@@ -28,10 +28,3 @@ export function decodedToken(token: string) {
     return decoded.data.role;
   }
 }
-
-export function decodedTokenUser(token: string) {
-  const decoded = verify(token, secret);
-  if (decoded !== undefined) {
-    return decoded;
-  }
-}

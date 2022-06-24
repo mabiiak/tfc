@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { getAll, create, update } from '../services/matches';
-// import { getIdTeam } from '../services/teams';
+import { getAll, create, updateGoals, updateProgress } from '../services/matches';
 
 export async function controllerAll(_req: Request, res: Response, next: NextFunction) {
   const allMatches = await getAll();
@@ -13,22 +12,25 @@ export async function controllerAll(_req: Request, res: Response, next: NextFunc
 }
 
 export async function controllerCreate(req: Request, res: Response) {
-  // const { homeTeam, awayTeam } = req.body;
-  // const home = await getIdTeam(homeTeam);
-  // const away = await getIdTeam(awayTeam);
-
-  // if (home === null || away === null) {
-  //   res.status(401).json({ message: 'There is no team with such id!' });
-  // }
-
   const itemCreated = await create(req.body);
+  const { users } = req.body;
+
+  console.log('CONTROLER', users);
 
   res.status(201).json(itemCreated);
 }
 
 export async function controllerEdit(req: Request, res: Response) {
+  const { homeTeamGoals: home, awayTeamGoals: away } = req.body;
   const { id } = req.params;
 
-  await update(Number(id));
+  await updateGoals(Number(id), Number(home), Number(away));
+  res.status(200).json({ message: 'Update goals!' });
+}
+
+export async function controllerEditFinish(req: Request, res: Response) {
+  const { id } = req.params;
+
+  await updateProgress(Number(id));
   res.status(200).json({ message: 'Finished' });
 }
