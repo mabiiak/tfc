@@ -20,13 +20,10 @@ export default async function validateToken(req: Request, res: Response, next: N
       next(err);
     }
 
-    // console.log(decoded);
     if (decoded) {
       const user = decoded.data.email;
-      console.log(user);
       checkUser(user);
     }
-    // return decoded;
   });
 
   next();
