@@ -13,9 +13,10 @@ export async function controllerAll(_req: Request, res: Response, next: NextFunc
 
 export async function controllerCreate(req: Request, res: Response) {
   const itemCreated = await create(req.body);
-  const { users } = req.body;
 
-  console.log('CONTROLER', users);
+  if (itemCreated === 'error') {
+    return res.status(404).json({ message: 'There is no team with such id!' });
+  }
 
   res.status(201).json(itemCreated);
 }

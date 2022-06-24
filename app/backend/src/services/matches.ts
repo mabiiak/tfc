@@ -1,6 +1,7 @@
 import Matches from '../database/models/match';
 import Teams from '../database/models/team';
 import InewMatch from '../interfaces/INewMacth';
+import { getIdTeam } from './teams';
 
 export async function getAll() {
   const allMatches = await Matches.findAll({
@@ -13,6 +14,13 @@ export async function getAll() {
 }
 
 export async function create(newMatch: InewMatch) {
+  const home = await getIdTeam(newMatch.homeTeam);
+  const away = await getIdTeam(newMatch.awayTeam);
+
+  if (home === 'error' || away === 'error') {
+    return 'error';
+  }
+
   const createMatch = await Matches.create({
     homeTeam: newMatch.homeTeam,
     awayTeam: newMatch.awayTeam,

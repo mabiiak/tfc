@@ -7,5 +7,9 @@ export async function getAllTeams() {
 
 export async function getIdTeam(id: number) {
   const team = await Teams.findOne({ where: { id } });
+
+  if (team === null) {
+    return 'error';
+  }
   return team;
 }

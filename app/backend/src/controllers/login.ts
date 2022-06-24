@@ -20,9 +20,8 @@ class PostLogin implements ILogin {
     const { email, password } = req.body;
 
     if (
-      !email
-      || email === ''
-      || !password
+      !email || email === ''
+      || !password || password === ''
     ) return res.status(400).json({ message: 'All fields must be filled' });
 
     const user = await this._service.execute({ email, password });
