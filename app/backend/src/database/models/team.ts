@@ -3,9 +3,16 @@ import db from '.';
 
 class team extends Model {
   public teamName: string;
+  public id: number;
 }
 
 team.init({
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+  },
   teamName: DataTypes.STRING,
 }, {
   underscored: true,

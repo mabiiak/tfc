@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from 'express';
 import LoginService from '../services/users';
 import { newToken } from '../utils/jwt';
 
+// Feito com a ajuda do Vinicius Tanaka
+
 interface ILogin {
   execute: controller,
 }
