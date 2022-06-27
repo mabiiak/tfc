@@ -14,6 +14,12 @@ export async function controllerAll(_req: Request, res: Response, next: NextFunc
 export async function controllerCreate(req: Request, res: Response) {
   const itemCreated = await create(req.body);
 
+  if (itemCreated === 'error equal') {
+    return res.status(401).json({
+      message: 'It is not possible to create a match with two equal teams',
+    });
+  }
+
   if (itemCreated === 'error') {
     return res.status(404).json({ message: 'There is no team with such id!' });
   }

@@ -14,8 +14,13 @@ export async function getAll() {
 }
 
 export async function create(newMatch: InewMatch) {
+  const { homeTeam, awayTeam } = newMatch;
   const home = await getIdTeam(newMatch.homeTeam);
   const away = await getIdTeam(newMatch.awayTeam);
+
+  if (homeTeam === awayTeam) {
+    return 'error equal';
+  }
 
   if (home === 'error' || away === 'error') {
     return 'error';

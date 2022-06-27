@@ -9,7 +9,7 @@ const secret = readFileSync('jwt.evaluation.key', 'utf8');
 export default async function validateToken(req: Request, res: Response, next: NextFunction) {
   const { authorization } = req.headers;
 
-  if (authorization === undefined) return res.status(404).json({ message: 'not found' });
+  if (authorization === undefined) return res.status(404).json({ message: 'not found token user' });
 
   verify(authorization, secret, (error, decoded) => {
     if (error) {

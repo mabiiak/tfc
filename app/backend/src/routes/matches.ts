@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import validateMatchTeams from '../middlewares/Matches';
 import validateToken from '../middlewares/validateToken';
 import {
   controllerAll,
@@ -11,7 +10,7 @@ import {
 const routeMatches = Router();
 
 routeMatches.get('/', controllerAll);
-routeMatches.post('/', validateMatchTeams, validateToken, controllerCreate);
+routeMatches.post('/', validateToken, controllerCreate);
 routeMatches.patch('/:id/', validateToken, controllerEdit);
 routeMatches.patch('/:id/finish', validateToken, controllerEditFinish);
 
