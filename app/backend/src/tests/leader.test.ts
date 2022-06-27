@@ -13,7 +13,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('4 - Testa rota: GET/teams', () => {
+describe('1 - Testa rota: GET/teams', () => {
   let chaiHttpResponse: Response;
 
   it('Retorna todos os times', async () => {
@@ -26,7 +26,7 @@ describe('4 - Testa rota: GET/teams', () => {
   });
 });
 
-describe('5 - Testa rota: GET/teams', () => {
+describe('2 - Testa rota: GET/teams', () => {
   let chaiHttpResponse: Response;
 
   it('Retorna todos os times', async () => {

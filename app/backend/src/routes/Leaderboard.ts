@@ -1,5 +1,8 @@
 import { Router } from 'express';
-import { controllerLeaderboard, controllerLeaderboardAway } from '../controllers/Leaderboard';
+import {
+  controllerLeaderboard,
+  controllerLeaderboardAway,
+} from '../controllers/Leaderboard';
 
 const routeLeaderboard = Router();
 

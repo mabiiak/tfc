@@ -15,7 +15,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('1 - Testa rota: POST/login', () => {
+describe('3 - Testa rota: POST/login', () => {
   describe('Usario invalido', () => {
     let chaiHttpResponse: Response;
 
