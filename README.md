@@ -193,8 +193,12 @@
 
 </details>
 
-  ### Sequelize
-
+<details>
+  <summary>
+    <h3>
+      Sequelize
+    </h3>
+    </summary>
   Para o desenvolvimento, o time de produto disponibilizou um *Diagrama de Entidade-Relacionamento (DER)* para construir a modelagem do banco de dados. Com essa imagem você já consegue saber como:
   - Nomear suas tabelas e colunas;
   - Quais são os tipos de suas colunas;
